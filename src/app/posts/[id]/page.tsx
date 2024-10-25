@@ -6,12 +6,8 @@ import { NEXT_PUBLIC_API_URL } from "@/constants";
 import Link from "next/link";
 import DeleteButton from "@/ui/DeleteButton";
 
-interface PostPageProps {
-  params: { id: string };
-}
-
-export default async function PostPage({ params }: PostPageProps) {
-  const { id } = await params;
+export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
+  const id = (await params).id;
   const post: Post = await getPostById(id);
 
   if (!post) {
