@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import axios from "@/services/axios";
 import { getPostById, updatePost } from "@/services/post";
 import Image from "next/image";
 
@@ -33,9 +32,21 @@ export default function EditPost() {
     try {
       const formData = new FormData();
       const file = event.target.files?.[0];
+
       if (file) {
         formData.append("file", file);
-        const { data } = await axios.post("/post/upload", formData);
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/upload`, {
+          method: "POST",
+          body: formData,
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Error uploading file");
+        }
+
+        const data = await res.json();
         setImageUrl(data.filePath);
       }
     } catch (error) {
