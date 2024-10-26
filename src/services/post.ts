@@ -1,7 +1,7 @@
 import axios from "./axios";
 import { CreatePost, UpdatePost } from "@/types/post";
 
-const API_URL = "http://localhost:4200/post";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/post`;
 
 export const getAllPosts = async () => {
   const { data } = await axios.get(API_URL);
