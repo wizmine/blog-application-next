@@ -1,29 +1,66 @@
-import axios from "./axios";
 import { CreatePost, UpdatePost } from "@/types/post";
 
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/post`;
 
 export const getAllPosts = async () => {
-  const { data } = await axios.get(API_URL);
-  return data;
+  const res = await fetch(API_URL, {
+    method: "GET",
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Error when receiving posts");
+  }
+  return res.json();
 };
 
 export const getPostById = async (id: string) => {
-  const { data } = await axios.get(`${API_URL}/${id}`);
-  return data;
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "GET",
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Error when receiving post with ID ${id}`);
+  }
+  return res.json();
 };
 
 export const createPost = async (postData: CreatePost) => {
-  const { data } = await axios.post(API_URL, postData);
-  return data;
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Create post error");
+  }
+  return res.json();
 };
 
 export const updatePost = async (id: string, postData: UpdatePost) => {
-  const { data } = await axios.patch(`${API_URL}/${id}`, postData);
-  return data;
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Update error with ID ${id}`);
+  }
+  return res.json();
 };
 
 export const deletePost = async (id: string) => {
-  const { data } = await axios.delete(`${API_URL}/${id}`);
-  return data;
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Delete error with ID ${id}`);
+  }
+  return res.json();
 };
