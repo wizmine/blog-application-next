@@ -8,16 +8,18 @@ const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter();
 
   const onClickRemove = async () => {
-    if (window.confirm("Are you sure you want to delete article?")) {
+    if (window.confirm("Are you sure you want to delete post?")) {
       await deletePost(id);
       router.push("/");
     }
   };
 
+  console.log("DeleteButton rendered with id: ", id);
+
   return (
     <button
+      className="px-4 py-2"
       onClick={onClickRemove}
-      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300"
     >
       Delete post
     </button>

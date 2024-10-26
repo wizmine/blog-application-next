@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Post } from "@/types/post";
 import { getPostById } from "@/services/post";
-import { NEXT_PUBLIC_API_URL } from "@/constants";
 import Link from "next/link";
 import DeleteButton from "@/ui/DeleteButton";
 
@@ -19,7 +18,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
       <div className="max-w-lg w-full text-center">
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
         <Image
-          src={`${NEXT_PUBLIC_API_URL}${post.image}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}${post.image}`}
           alt={post.title}
           layout="responsive"
           width={800}
@@ -32,12 +31,12 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             Back home
           </button>
         </Link>
+        <DeleteButton id={id} />
         <Link href={`/edit/${id}`} passHref>
           <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300">
             Edit post
           </button>
         </Link>
-        <DeleteButton id={id} />
       </div>
     </div>
   );

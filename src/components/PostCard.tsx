@@ -1,4 +1,3 @@
-import { NEXT_PUBLIC_API_URL } from "@/constants";
 import { Post } from "@/types/post";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +6,7 @@ const PostCard: React.FC<Post> = ({ id, title, description, image }) => {
   return (
     <div className="border rounded-lg shadow-md overflow-hidden">
       <Image
-        src={`${NEXT_PUBLIC_API_URL}${image}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}${image}`}
         alt={title}
         width={800}
         height={400}

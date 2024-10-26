@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "../services/axios";
 import { createPost } from "@/services/post";
-import { NEXT_PUBLIC_API_URL } from "@/constants";
 import Image from "next/image";
 
 const AddPost = () => {
@@ -78,7 +77,7 @@ const AddPost = () => {
               Remove Image
             </button>
             <Image
-              src={`${NEXT_PUBLIC_API_URL}${imageUrl}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
               alt={title}
               width={800}
               height={400}

@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "@/services/axios";
 import { getPostById, updatePost } from "@/services/post";
-import { NEXT_PUBLIC_API_URL } from "@/constants";
 import Image from "next/image";
 
 export default function EditPost() {
@@ -91,7 +90,7 @@ export default function EditPost() {
                 Remove Image
               </button>
               <Image
-                src={`${NEXT_PUBLIC_API_URL}${imageUrl}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
                 alt={title}
                 width={800}
                 height={400}
