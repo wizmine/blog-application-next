@@ -1,10 +1,14 @@
 import AddPost from "@/components/AddPost";
 import PostCard from "@/components/PostCard";
-import { getAllPosts } from "@/services/post";
+// import { getAllPosts } from "@/services/post";
 import { Post } from "@/types/post";
 
 export default async function Home() {
-  const posts: Post[] = await getAllPosts();
+  // const posts: Post[] = await getAllPosts();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post`, {
+    cache: "no-cache",
+  });
+  const posts: Post[] = await res.json();
 
   return (
     <div className="container mx-auto py-12">

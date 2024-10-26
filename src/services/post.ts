@@ -4,13 +4,7 @@ import { CreatePost, UpdatePost } from "@/types/post";
 const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/post`;
 
 export const getAllPosts = async () => {
-  const { data } = await axios.get(API_URL, {
-    headers: {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-      Expires: "0",
-    },
-  });
+  const { data } = await axios.get(API_URL);
   return data;
 };
 
